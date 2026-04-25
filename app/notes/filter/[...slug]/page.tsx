@@ -1,9 +1,13 @@
-import NotesClient from '../../Notes.client';
+import NotesClient from './Notes.client';
 
-export default function FilterPage({ params }: { params: { slug: string[] } }) {
-  const tag = params.slug?.[0];
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug?: string[] }>;
+}) {
+  const { slug } = await params;
 
-  const normalizedTag = tag === 'all' ? undefined : tag;
+  const tag = slug?.[0];
 
-  return <NotesClient tag={normalizedTag} />;
+  return <NotesClient tag={tag} />;
 }
