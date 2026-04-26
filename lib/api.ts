@@ -8,18 +8,15 @@ const api = axios.create({
   },
 });
 
-// axios.defaults.baseURL = 'https://notehub-public.goit.study/api';
-// // axios.defaults.headers.common['Authorization'] = `Bearer ${TOKEN}`;
-
 export interface FetchNotesResponse {
   notes: Note[];
   totalPages: number;
 }
 
-interface Params {
+interface FetchNotesParams {
   page: number;
   perPage: number;
-  search?: string;
+  search: string;
   tag?: string;
 }
 
@@ -28,10 +25,18 @@ export const fetchNotes = async ({
   perPage,
   search,
   tag,
-}: Params): Promise<FetchNotesResponse> => {
-  const res = await api.get('/notes', {
-    params: { page, perPage, search, tag },
-  });
+}: FetchNotesParams): Promise<FetchNotesResponse> => {
+  const params: Record<string, string | number> = {
+    page,
+    perPage,
+    search,
+  };
+
+  if (tag && tag !== 'all') {
+    params.tag = tag;
+  }
+
+  const res = await api.get('/notes', { params });
 
   return res.data;
 };
