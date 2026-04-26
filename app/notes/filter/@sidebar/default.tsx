@@ -1,5 +1,3 @@
-import SidebarNotes from './page';
-
-export default function DefaultSidebar() {
-  return <SidebarNotes />;
+export default function Default() {
+  return null;
 }
