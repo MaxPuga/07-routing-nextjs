@@ -1,3 +1,7 @@
+export default function Page() {
+  return null;
+}
+
 // import css from './SidebarNotes.module.css';
 // import Link from 'next/link';
 
