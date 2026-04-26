@@ -27,7 +27,7 @@ export default function NotesClient({ tag }: { tag?: string }) {
     return () => clearTimeout(t);
   }, [search]);
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ['notes', page, debouncedSearch, tag],
     queryFn: () =>
       fetchNotes({
@@ -61,6 +61,8 @@ export default function NotesClient({ tag }: { tag?: string }) {
       </header>
 
       {isLoading && <p>Loading...</p>}
+
+      {isError && <p>Error loading notes</p>}
 
       {notes.length > 0 && <NoteList notes={notes} />}
 
