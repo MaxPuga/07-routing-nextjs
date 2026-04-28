@@ -25,10 +25,12 @@ export default function NotePreviewClient({ id }: { id: string }) {
           ✕
         </button>
 
-        <h2>{data.title}</h2>
+        <h2 className={css.header}>{data.title}</h2>
         <p className={css.tag}>{data.tag}</p>
-        <p>{data.content}</p>
-        <p>{new Date(data.createdAt).toLocaleDateString()}</p>
+        <p className={css.content}>{data.content}</p>
+        <p className={css.date}>
+          {new Date(data.createdAt).toLocaleDateString()}
+        </p>
       </div>
     </Modal>
   );
